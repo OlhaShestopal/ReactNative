@@ -1,34 +1,29 @@
-import React from 'react'
-import { StoreContext} from './store'
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import {WelcomScreen} from './screens/WelcomeScreen'
-import {MainScreen} from './screens/MainScreen'
-import { useReducer } from 'react/cjs/react.production.min'
-import { initialState } from './store/state'
+import React, { useReducer } from "react";
+import { Reducer } from "./store/reducer";
+import {StoreContext} from './store/index';
+import { initialState } from "./store/state";
+import {createStackNavigator} from '@react-navigation/stack';
+import {WelcomeScreen} from './screens/WelcomeScreen';
+import {MainScreen} from './screens/MainScreen';
+import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 
-function App() {
-  
+export default function App() {
+const [state, dispatch] = useReducer(Reducer, initialState)
+
   return (
-    <StoreContext.Provider value={{state, dispatch}}>
+    <StoreContext.Provider value={{state,dispatch}}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Welcom" component={WelcomScreen} />
-          <Stack.Screen name="Main" component={MainScreen}/>
+          {state.isLoading == true ?(
+            <Stack.Screen name="Welcome" component= {WelcomeScreen} />
+          ) :(
+            <Stack.Screen name="Main" component= {MainScreen} />
+          )}
         </Stack.Navigator>
       </NavigationContainer>
     </StoreContext.Provider>
-    
   
-    
   );
 }
-
-export default App;
-
-
-
-
-

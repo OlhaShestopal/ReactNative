@@ -1,37 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { View, Text } from 'react-native';
-import { useContext } from 'react/cjs/react.production.min';
 import { StoreContext } from '../store';
+import * as types from '../store/actions';
 
-function WelcomScreen() {
-    const [isLoading, setLoading] = useState(false);
-    const {state} = useContext(StoreContext)
-    const [data, setData] = useState([]);
-  
-    function handleFirstLaoding(data){
-      if (state.firstLoading){
-        setData(data.link);
-      }else{
-        setData(data.home)
+
+function WelcomeScreen() {
+    const {state, dispatch} = useContext(StoreContext)
+
+    const handleGetUrl = (data) =>{
+      let linkUrl;
+      if (state.isFirstLoading){
+        linkUrl = data.link
+      } else {
+        linkUrl = data.home
       }
-      setLoading(true)
+      dispatch({
+        type: types.GET_LINK,
+        paiload: linkUrl
+      });
+      dispatch({
+            type: types.CLOSE_WELCOME,
+          }
+          )
+     
     }
 
     useEffect(() => {
       fetch('https://efs5i1ube5.execute-api.eu-central-1.amazonaws.com/prod')
         .then((response) => response.json())
-        .then((json) => handleFirstLaoding(json))
-        .catch(() => setData('error'))
-        .finally(() => setLoading(true));
+        .then((json) => handleGetUrl(json))
+        // .catch(() => ('error'))
     }, []);
+
     
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>{data}</Text>
+        <Text>{state.link}</Text>
       </View>
     );
 }
 
 export {
-    WelcomScreen
+    WelcomeScreen
 }
