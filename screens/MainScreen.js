@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, Text } from 'react-native';
+import { StoreContext } from '../store';
+import{WebViewExample} from '../components/webview'
 
 function MainScreen() {
+  const {state} = useContext(StoreContext)
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Link</Text>
-    </View>
+    <WebViewExample/>
   );
 }
 

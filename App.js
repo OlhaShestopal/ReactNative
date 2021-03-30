@@ -13,13 +13,13 @@ export default function App() {
 const [state, dispatch] = useReducer(Reducer, initialState)
 
   return (
-    <StoreContext.Provider value={{state,dispatch}}>
+    <StoreContext.Provider value={{state, dispatch}}>
       <NavigationContainer>
         <Stack.Navigator>
           {state.isLoading == true ?(
-            <Stack.Screen name="Welcome" component= {WelcomeScreen} />
+            <Stack.Screen name="React Native" component= {WelcomeScreen} />
           ) :(
-            <Stack.Screen name="Main" component= {MainScreen} />
+            <Stack.Screen name="Webview" component= {MainScreen} />
           )}
         </Stack.Navigator>
       </NavigationContainer>
