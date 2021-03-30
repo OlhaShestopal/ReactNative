@@ -4,7 +4,7 @@
     "slug": "my-project",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/APP_ICON",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

@@ -7,8 +7,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function WelcomeScreen() {
     const {state, dispatch} = useContext(StoreContext)
-    
-   
     const handleSetNewUrl = async(value) => {
         try {
           const newUrl = JSON.stringify(value)
@@ -41,14 +39,12 @@ function WelcomeScreen() {
       return urlLink;
 
     }
-
     const handleCloseScreen = () => {
       dispatch({
         type: types.CLOSE_WELCOME,
         }
       )
     }
-
     useEffect(() => {
       fetch('https://efs5i1ube5.execute-api.eu-central-1.amazonaws.com/prod')
         .then((response) => response.json())
