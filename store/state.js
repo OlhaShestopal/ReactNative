@@ -1,7 +1,8 @@
 const initialState = {
     isLoading: true,
     isFirstLoading: true,
-    link: null,
+    link: {},
+    
 }
 
 export{
